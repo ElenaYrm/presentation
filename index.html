@@ -8,7 +8,7 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/league.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
@@ -16,8 +16,133 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h2>3 methods of optimizing The Critical Rendering Path</h2>
+					<aside class="notes">
+						It's steps how the browser convert the HTML, CSS, and JavaScript into pixels on the screen.
+					</aside>
+				</section>
+				<section>
+					<h3>The Critical Rendering Path</h3>
+					<section>
+						<p class="fragment">HTML --> DOM</p>
+						<p class="fragment">CSS --> CSSOM</p>
+						<p class="fragment">JAVASCRIPT</p>
+
+						<aside class="notes">
+							1 - getting DOM tree. It is the object presentation of the HTML document that we can work through JavaScript.
+							2 - parsing CSS. As a result we have CSSOM that contains all the information about the styles for DOM.
+							3 - JavaScript execution. This process can be blocking, you can avoid it by using "defer" or "async" attribute for scripts.
+						</aside>
+					</section>
+					<section>
+						<div>
+							<p>&dArr;</p>
+							<p>RENDER TREE</p>
+							<p>combination DOM and CSSOM with only visible content</p>
+						</div>
+						<div class="fragment">
+							<p>&dArr;</p>
+							<p>LAYOUT</p>
+							<p>calculating the exact position and size of each element</p>
+						</div>
+					</section>
+					<section>
+						<div>
+							<p>&dArr;</p>
+							<p>PAINT</p>
+							<p>painting the pixels to the screen</p>
+						</div>
+						<div class="fragment">
+							<p>&dArr;</p>
+							<p>COMPOSITE</p>
+							<p>division elements in multiple layers to optimization</p>
+						</div>
+					</section>
+				</section>
+				<section>
+					<h3>The Critical Rendering Path</h3>
+					<p>...</p>
+					<p class="fragment highlight-red" data-fragment-index="3">RENDER TREE</p>
+					<p>&dArr;</p>
+					<p class="fragment highlight-red" data-fragment-index="2">LAYOUT</p>
+					<p>&dArr;</p>
+					<p class="fragment highlight-red" data-fragment-index="1">PAINT</p>
+					<p>&dArr;</p>
+					<p>...</p>
+					<aside class="notes">
+						The first - color or opacity has been changed. At this situation only repaint will be triggered.
+						The second - the screen or element size has been changed. So reflow will be triggered.
+						And the last  - some element has been added on the page, for example item of list. At this stage browser will modify render tree, calculate layout and at the end paint the result on the page.
+					</aside>
+				</section>
+				<section>
+					<h3>Virtual DOM</h3>
+					<img src="./images/virtualDOM.webp">
+				</section>
+				<section>
+					<h3>Virtual DOM</h3>
+					<div style="display: flex; align-items: flex-start; justify-content: space-between">
+						<div style="margin-right: 20px; flex-basis: 50%">
+							<p>+</p>
+							<ul>
+								<li>Batch updating</li>
+								<li>Lightweight updating</li>
+								<li>Declarative code</li>
+							</ul>
+						</div>
+						<div style="flex-basis: 50%">
+							<p>-</p>
+							<ul>
+								<li>Memory usage</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>SSR</h3>
+					<div style="display: flex; align-items: flex-start; justify-content: space-between">
+						<div style="margin-right: 20px; flex-basis: 50%">
+							<p>+</p>
+							<ul>
+								<li>Faster page load</li>
+								<li>Improved SEO</li>
+								<li>Improved mobile experience</li>
+								<li>Improved accessibility</li>
+							</ul>
+						</div>
+						<div style="flex-basis: 50%">
+							<p>-</p>
+							<ul>
+								<li>Increased server load</li>
+								<li>Delayed interactivity</li>
+								<li>More complex setup</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>Pages lazy loading</h3>
+					<div style="display: flex; align-items: flex-start; justify-content: space-between">
+						<div style="margin-right: 20px; flex-basis: 50%">
+							<p>+</p>
+							<ul>
+								<li>Reduced initial load time</li>
+								<li>Bandwidth conservation</li>
+								<li>System resource conservation</li>
+							</ul>
+						</div>
+						<div style="flex-basis: 50%">
+							<p>-</p>
+							<ul>
+								<li>Increased the other pages load time</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>Thank you!</h3>
+				</section>
 			</div>
 		</div>
 
