@@ -30,9 +30,9 @@
 						<p class="fragment">JAVASCRIPT</p>
 
 						<aside class="notes">
-							1 - getting DOM tree. It is the object presentation of the HTML document that we can work through JavaScript.
-							2 - parsing CSS. As a result we have CSSOM that contains all the information about the styles for DOM.
-							3 - JavaScript execution. This process can be blocking, you can avoid it by using "defer" or "async" attribute for scripts.
+							CSS parsing is blocking: the browser blocks page rendering until it receives and processes all the CSS files because some rules can be overwritten.
+							<br/>
+							JavaScript execution can be blocking, you can avoid it by using "defer" or "async" attribute for scripts.
 						</aside>
 					</section>
 					<section>
@@ -46,6 +46,11 @@
 							<p>LAYOUT</p>
 							<p>calculating the exact position and size of each element</p>
 						</div>
+						<aside class="notes">
+							Render tree - The invisible tags like head or script will be ignored same as the display "none" style for elements.
+							<br/>
+							Layout - a browser counts the width and height of each element, and defines position on the page for all elements.
+						</aside>
 					</section>
 					<section>
 						<div>
@@ -58,6 +63,9 @@
 							<p>COMPOSITE</p>
 							<p>division elements in multiple layers to optimization</p>
 						</div>
+						<aside class="notes">
+							On first load, the entire screen is painted. After that, only modified areas will be repainted. So browsers are optimized to repaint by composing in particular.
+						</aside>
 					</section>
 				</section>
 				<section>
@@ -71,14 +79,19 @@
 					<p>&dArr;</p>
 					<p>...</p>
 					<aside class="notes">
-						The first - color or opacity has been changed. At this situation only repaint will be triggered.
-						The second - the screen or element size has been changed. So reflow will be triggered.
-						And the last  - some element has been added on the page, for example item of list. At this stage browser will modify render tree, calculate layout and at the end paint the result on the page.
+						If we change color or opacity, repaint process will be triggered.
+						<br>
+						If we change the screen or element size, or when we directly set or get some element property (for example, position or width), reflow will be triggered.
+						<br>
+						And if we add some element on the page, for example item of list, at this stage browser will modify render tree, calculate layout and paint the result on the page.
 					</aside>
 				</section>
 				<section>
 					<h3>Virtual DOM</h3>
 					<img src="./images/virtualDOM.webp">
+					<aside class="notes">
+						The Virtual DOM is some abstraction and a lightweight copy of the real DOM. The main idea is minimizing direct manipulations of the Real DOM. If anything new has been added to the application, a new virtual DOM is created. This new Virtual DOM tree is compared with the previous Virtual DOM tree and find the changes. And only these changes update the real DOM.
+					</aside>
 				</section>
 				<section>
 					<h3>Virtual DOM</h3>
@@ -98,6 +111,9 @@
 							</ul>
 						</div>
 					</div>
+					<aside class="notes">
+						The main advantage of the Virtual DOM is applying differences to the Real DOM rather than rerendering it with each change. And the second pros for this model is manipulating Virtual DOM is fast because of it's lightweighting. But in this model we have to save the copies of Virtual DOM, so as a result memory usage increases. Maybe for simple applications, this might be more than the cost of just updating the Real DOM directly.
+					</aside>
 				</section>
 				<section>
 					<h3>SSR</h3>
@@ -120,6 +136,9 @@
 							</ul>
 						</div>
 					</div>
+					<aside class="notes">
+						SSR is when web pages is rendered on the server and sent to the client as a ready HTML pages. As I said before,  JavaScript is resource-heavy, SSR allows browser to load only part of JS that is needed to interact page. This means that users who visit your site will be able to see everything much faster than if they were just looking at blank screen while waiting for loading and executing JavaScript.
+					</aside>
 				</section>
 				<section>
 					<h3>Pages lazy loading</h3>
@@ -139,6 +158,9 @@
 							</ul>
 						</div>
 					</div>
+					<aside class="notes">
+						Lazy loading pages allows to defer the loading of non-critical resources. Instead, these non-critical resources are loaded at the moment of need. We can apply lazy loading to about any resource, not only pages. We can reduce initial load time by pages lightweighting and delivering content to users only if it’s requested. And these lead to system resource conservation. But, you must understand, that there will be more time for loading another page on this site.
+					</aside>
 				</section>
 				<section>
 					<h3>Thank you!</h3>
